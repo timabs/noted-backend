@@ -1,0 +1,29 @@
+{
+  "name": "noted-backend",
+  "version": "1.0.0",
+  "description": "Express/Node/MongoDB backend for Noted",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timabs/noted-backend.git"
+  },
+  "author": "Timur Abdullayev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timabs/noted-backend/issues"
+  },
+  "homepage": "https://github.com/timabs/noted-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.2.4",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  }
+}
