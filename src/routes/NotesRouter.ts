@@ -3,6 +3,6 @@ import { getNotes } from "../controllers/NotesController";
 
 const NotesRouter = express.Router();
 
-NotesRouter.route("/:userId").get(getNotes);
+NotesRouter.route("/").get(getNotes);
 
 export default NotesRouter;

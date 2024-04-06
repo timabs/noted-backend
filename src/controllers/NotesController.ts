@@ -3,11 +3,14 @@ import NotesModel from "../models/NotesModel";
 import express, { Request, Response } from "express";
 const NotesBase = NotesModel;
 
-export const getNotes = async (req: Request, res: Response) => {
+export interface NotesRequest extends Request {
+  tempUser?: string;
+}
+
+export const getNotes = async (req: NotesRequest, res: Response) => {
   try {
     //TO-DO: Replace with temp user ID and auth handling
-
-    const { userId } = req.params;
+    const userId = req.tempUser;
     const notes = await NotesBase.find({ user: userId });
     res.status(201).json({ notes });
   } catch (error) {
