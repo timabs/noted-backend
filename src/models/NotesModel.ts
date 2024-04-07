@@ -1,5 +1,13 @@
 import mongoose from "mongoose";
 
+const dateOptions: Intl.DateTimeFormatOptions = {
+  month: "long",
+  day: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+};
+
 const NoteSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.Mixed,
@@ -14,10 +22,7 @@ const NoteSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+    default: new Date().toLocaleString("en-US", dateOptions).replace("at", "-"),
   },
 });
 
