@@ -17,3 +17,18 @@ export const getNotes = async (req: NotesRequest, res: Response) => {
     res.status(500).json({ msg: `Error fetching notes: ${error}` });
   }
 };
+export const createNote = async (req: NotesRequest, res: Response) => {
+  try {
+    const userId = req.tempUser;
+    const { note } = req.body;
+    const noteData = {
+      user: userId,
+      title: note.title,
+      content: note.content,
+    };
+    const createdNote = await NotesBase.create(noteData);
+    res.status(201).json(createdNote);
+  } catch (error) {
+    res.status(500).json({ message: `Error creating note: ${error}` });
+  }
+};

@@ -1,8 +1,8 @@
 import express from "express";
-import { getNotes } from "../controllers/NotesController";
+import { createNote, getNotes } from "../controllers/NotesController";
 
 const NotesRouter = express.Router();
 
-NotesRouter.route("/").get(getNotes);
+NotesRouter.route("/").get(getNotes).post(createNote);
 
 export default NotesRouter;
