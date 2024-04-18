@@ -32,3 +32,14 @@ export const createNote = async (req: NotesRequest, res: Response) => {
     res.status(500).json({ message: `Error creating note: ${error}` });
   }
 };
+
+export const deleteNote = async (req: NotesRequest, res: Response) => {
+  try {
+    const userId = req.tempUser;
+    const { noteId } = req.params;
+    const deletedNote = await NotesBase.deleteOne({ _id: noteId });
+    res.status(200).json(deletedNote);
+  } catch (error) {
+    res.status(500).json({ message: `Error deleting note ${error}` });
+  }
+};
