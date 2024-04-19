@@ -25,6 +25,7 @@ export const createNote = async (req: NotesRequest, res: Response) => {
       user: userId,
       title: note.title,
       content: note.content,
+      date: note.date,
     };
     const createdNote = await NotesBase.create(noteData);
     res.status(201).json(createdNote);

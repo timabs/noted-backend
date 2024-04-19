@@ -22,7 +22,7 @@ const NoteSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-    default: new Date().toLocaleString("en-US", dateOptions).replace("at", "-"),
+    default: new Date().toLocaleString("en-US").replace("at", "-"),
   },
 });
 
