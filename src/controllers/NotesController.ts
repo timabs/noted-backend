@@ -44,3 +44,19 @@ export const deleteNote = async (req: NotesRequest, res: Response) => {
     res.status(500).json({ message: `Error deleting note ${error}` });
   }
 };
+
+export const editNote = async (req: NotesRequest, res: Response) => {
+  try {
+    const userId = req.tempUser;
+    const { note } = req.body;
+    const { noteId } = req.params;
+    console.log(note);
+
+    const updatedNote = await NotesBase.findByIdAndUpdate(noteId, note, {
+      new: true,
+    });
+    res.status(201).json(updatedNote);
+  } catch (error) {
+    res.status(500).json({ message: `Error updating note ${error}` });
+  }
+};
