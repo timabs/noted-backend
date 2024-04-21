@@ -50,7 +50,6 @@ export const editNote = async (req: NotesRequest, res: Response) => {
     const userId = req.tempUser;
     const { note } = req.body;
     const { noteId } = req.params;
-    console.log(note);
 
     const updatedNote = await NotesBase.findByIdAndUpdate(noteId, note, {
       new: true,
