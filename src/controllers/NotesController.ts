@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
 import NotesModel from "../models/NotesModel";
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 const NotesBase = NotesModel;
 
 export interface NotesRequest extends Request {
