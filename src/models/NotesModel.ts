@@ -8,7 +8,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
-const NoteSchema = new mongoose.Schema({
+export const NoteSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.Mixed,
     required: true,
