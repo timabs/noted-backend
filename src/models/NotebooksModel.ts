@@ -16,3 +16,5 @@ const NotebookSchema = new mongoose.Schema({
     },
   ],
 });
+
+export default mongoose.model("NotebooksModel", NotebookSchema, "Notes");
