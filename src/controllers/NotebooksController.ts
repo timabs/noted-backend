@@ -30,7 +30,7 @@ export const createNotebook = async (req: NotesRequest, res: Response) => {
       title: notebook.title,
       notes: notebook.notes,
     };
-    const createdNotebook = NotebooksBase.create(notebookData);
+    const createdNotebook = await NotebooksBase.create(notebookData);
     res.status(201).json(createdNotebook);
   } catch (error) {
     res.status(500).json({ message: `Error creating notebook: ${error}` });
@@ -39,6 +39,14 @@ export const createNotebook = async (req: NotesRequest, res: Response) => {
 
 export const addNoteToNotebook = async (req: NotesRequest, res: Response) => {
   try {
-    const ntbkId = req.body;
-  } catch (error) {}
+    const { notebookId, noteToAddId } = req.body;
+    const noteAdded = await NotebooksBase.findByIdAndUpdate(notebookId, {
+      $push: { notes: noteToAddId },
+    });
+    res.status(201).json(noteAdded);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Error adding note to notebook: ${error}` });
+  }
 };
