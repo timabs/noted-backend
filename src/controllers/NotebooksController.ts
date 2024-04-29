@@ -39,10 +39,15 @@ export const createNotebook = async (req: NotesRequest, res: Response) => {
 
 export const addNoteToNotebook = async (req: NotesRequest, res: Response) => {
   try {
-    const { notebookId, noteToAddId } = req.body;
-    const noteAdded = await NotebooksBase.findByIdAndUpdate(notebookId, {
-      $push: { notes: noteToAddId },
-    });
+    const { notebookId } = req.params;
+    const { noteToAddId } = req.body;
+    const noteAdded = await NotebooksBase.findByIdAndUpdate(
+      notebookId,
+      {
+        $push: { notes: noteToAddId },
+      },
+      { new: true }
+    );
     res.status(201).json(noteAdded);
   } catch (error) {
     res
