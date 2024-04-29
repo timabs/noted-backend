@@ -18,7 +18,7 @@ export const getNotebooks = async (req: NotesRequest, res: Response) => {
 interface NotebookDataObj {
   user: string | undefined;
   title: string;
-  notes?: Array<mongoose.Schema.Types.ObjectId>;
+  notes?: Array<mongoose.Schema.Types.ObjectId> | undefined;
 }
 
 export const createNotebook = async (req: NotesRequest, res: Response) => {
@@ -28,6 +28,7 @@ export const createNotebook = async (req: NotesRequest, res: Response) => {
     const notebookData: NotebookDataObj = {
       user: userId,
       title: notebook.title,
+      notes: notebook.notes,
     };
     const createdNotebook = NotebooksBase.create(notebookData);
     res.status(201).json(createdNotebook);
