@@ -5,6 +5,7 @@ import cors from "cors";
 //routers
 import NotesRouter from "./routes/NotesRouter";
 import { tempUser } from "./middleware/tempUser";
+import NotebooksRouter from "./routes/NotebooksRouter";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(tempUser);
 app.use("/api/v1/notes", NotesRouter);
+app.use("/api/v1/notebooks", NotebooksRouter);
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI!);

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { NoteSchema } from "./NotesModel";
 
 const NotebookSchema = new mongoose.Schema({
   user: {
@@ -17,4 +16,4 @@ const NotebookSchema = new mongoose.Schema({
   ],
 });
 
-export default mongoose.model("NotebooksModel", NotebookSchema, "Notes");
+export default mongoose.model("NotebooksModel", NotebookSchema, "Notebooks");
