@@ -24,6 +24,12 @@ export const NoteSchema = new mongoose.Schema({
     type: String,
     default: new Date().toLocaleString("en-US").replace("at", "-"),
   },
+  notebooksPartOf: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "NotebooksModel",
+    },
+  ],
 });
 
 export default mongoose.model("NotesModel", NoteSchema, "Notes");
