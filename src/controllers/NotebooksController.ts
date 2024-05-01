@@ -55,3 +55,25 @@ export const addNoteToNotebook = async (req: NotesRequest, res: Response) => {
       .json({ message: `Error adding note to notebook: ${error}` });
   }
 };
+
+export const fetchNotesInNotebook = async (
+  req: NotesRequest,
+  res: Response
+) => {
+  try {
+    const { notebookId } = req.params;
+    const notebookWithNotes = await NotebooksBase.aggregate([
+      { $match: { _id: new mongoose.Types.ObjectId(notebookId) } },
+      {
+        $lookup: {
+          from: "Notes",
+          localField: "notes",
+          foreignField: "_id",
+          as: "fullNotes",
+        },
+      },
+      { $unwind: "$fullNotes" },
+      { $sort: { "fullNotes.updatedAt": -1 } },
+    ]);
+  } catch (error) {}
+};
