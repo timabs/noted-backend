@@ -1,9 +1,11 @@
 import NotebooksModel from "../models/NotebooksModel";
+import NotesModel from "../models/NotesModel";
 import { Response } from "express";
 import { NotesRequest } from "./NotesController";
 import mongoose from "mongoose";
 
 const NotebooksBase = NotebooksModel;
+const NotesBase = NotesModel;
 
 export const getNotebooks = async (req: NotesRequest, res: Response) => {
   try {
@@ -48,6 +50,9 @@ export const addNoteToNotebook = async (req: NotesRequest, res: Response) => {
       },
       { new: true }
     );
+    await NotesBase.findByIdAndUpdate(noteToAddId, {
+      $push: { notebooksPartOf: notebookId },
+    });
     res.status(201).json(noteAdded);
   } catch (error) {
     res
