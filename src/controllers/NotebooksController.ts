@@ -42,7 +42,7 @@ export const createNotebook = async (req: NotesRequest, res: Response) => {
 export const addNoteToNotebook = async (req: NotesRequest, res: Response) => {
   try {
     const { notebookId } = req.params;
-    const { noteToAddId } = req.body;
+    const { noteId: noteToAddId } = req.body;
     const noteAdded = await NotebooksBase.findByIdAndUpdate(
       notebookId,
       {
@@ -77,8 +77,18 @@ export const fetchNotesInNotebook = async (
           as: "fullNotes",
         },
       },
-      { $unwind: "$fullNotes" },
       { $sort: { "fullNotes.updatedAt": -1 } },
+      // {
+      //   $group: {
+      //     _id: '$_id',
+
+      //   }
+      // }
     ]);
-  } catch (error) {}
+    res.status(201).json(notebookWithNotes[0]);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Error fetching notes in notebook: ${error}` });
+  }
 };
